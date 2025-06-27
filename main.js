@@ -45,12 +45,20 @@ document.getElementById('check').onclick = function() {
 
 document.getElementById('decrement').onclick = function() {
   const input = document.getElementById('guess');
-  let value = Number(input.value) || 1;
-  if (value > 1) input.value = value - 1;
+  let value = parseInt(input.value, 10);
+  if (isNaN(value) || value <= 1) {
+    input.value = 1;
+  } else {
+    input.value = value - 1;
+  }
 };
 
 document.getElementById('increment').onclick = function() {
   const input = document.getElementById('guess');
-  let value = Number(input.value) || 1;
-  if (value < 100) input.value = value + 1;
+  let value = parseInt(input.value, 10);
+  if (isNaN(value) || value >= 100) {
+    input.value = 100;
+  } else {
+    input.value = value + 1;
+  }
 };

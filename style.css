@@ -129,8 +129,15 @@ button:hover, button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 18px;
+}
+
+.input-row input[type="number"] {
+  width: 90px;
+  font-size: 1.2rem;
+  padding: 10px 8px;
+  margin-bottom: 0;
 }
 
 .arrow-btn {
@@ -138,9 +145,9 @@ button:hover, button:focus {
   color: #3a4a6b;
   border: none;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
@@ -149,6 +156,7 @@ button:hover, button:focus {
   align-items: center;
   justify-content: center;
   user-select: none;
+  margin-left: 2px;
 }
 
 .arrow-btn:active {
@@ -157,13 +165,14 @@ button:hover, button:focus {
 }
 
 @media (max-width: 600px) {
-  .input-row {
-    gap: 4vw;
-    margin-bottom: 18px;
+  .input-row input[type="number"] {
+    width: 60vw;
+    font-size: 1.4rem;
+    padding: 12px 8px;
   }
   .arrow-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
 }
