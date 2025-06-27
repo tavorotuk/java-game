@@ -51,6 +51,7 @@ document.getElementById('decrement').onclick = function() {
   } else {
     input.value = value - 1;
   }
+  input.focus();
 };
 
 document.getElementById('increment').onclick = function() {
@@ -61,4 +62,5 @@ document.getElementById('increment').onclick = function() {
   } else {
     input.value = value + 1;
   }
+  input.focus();
 };
