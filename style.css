@@ -202,7 +202,7 @@ button:hover, button:focus {
   min-height: 180px;
   border-radius: 50%;
   box-shadow: 0 0 60px 20px #222, 0 0 40px 10px #6a82fb55;
-  background: #fff;
+  background: transparent;
   object-fit: contain;
   position: relative;
   opacity: 0;

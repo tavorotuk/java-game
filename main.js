@@ -32,13 +32,10 @@ function setLang(lang) {
   currentLang = lang;
   document.getElementById('game-title').textContent = translations[lang].title;
   document.getElementById('check').textContent = translations[lang].check;
-  // Активна кнопка
   document.getElementById('pl-btn').classList.toggle('active', lang === 'pl');
   document.getElementById('ua-btn').classList.toggle('active', lang === 'ua');
-  // Якщо є кнопка retry
   const retryBtn = document.getElementById('retry');
   if (retryBtn) retryBtn.textContent = translations[lang].retry;
-  // Очистити результат
   document.getElementById('result').textContent = '';
 }
 
@@ -107,42 +104,26 @@ function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
+const guessInput = document.getElementById('guess');
+const guessRange = document.getElementById('guess-range');
+
 if (isMobile()) {
-  const inputRow = document.querySelector('.input-row');
-  const input = document.getElementById('guess');
+  guessRange.style.display = '';
+  guessInput.style.width = '60px';
+  guessInput.value = guessRange.value = 1;
 
-  const decrementBtn = document.createElement('button');
-  decrementBtn.type = 'button';
-  decrementBtn.className = 'arrow-btn';
-  decrementBtn.id = 'decrement';
-  decrementBtn.textContent = '−';
-
-  const incrementBtn = document.createElement('button');
-  incrementBtn.type = 'button';
-  incrementBtn.className = 'arrow-btn';
-  incrementBtn.id = 'increment';
-  incrementBtn.textContent = '+';
-
-  // Додаємо кнопки одразу після input
-  input.after(decrementBtn, incrementBtn);
-
-  decrementBtn.onclick = function() {
-    let value = parseInt(input.value, 10);
-    if (isNaN(value) || value <= 1) {
-      input.value = 1;
-    } else {
-      input.value = value - 1;
-    }
-    input.focus();
+  // Слайдер → input
+  guessRange.oninput = function() {
+    guessInput.value = this.value;
   };
-
-  incrementBtn.onclick = function() {
-    let value = parseInt(input.value, 10);
-    if (isNaN(value) || value >= 100) {
-      input.value = 100;
-    } else {
-      input.value = value + 1;
-    }
-    input.focus();
+  // input → слайдер
+  guessInput.oninput = function() {
+    let val = parseInt(this.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > 100) val = 100;
+    this.value = val;
+    guessRange.value = val;
   };
+} else {
+  guessRange.style.display = 'none';
 }

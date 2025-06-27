@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Вгадай число</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
   <div class="game-panel">
@@ -14,7 +15,7 @@
     <h2 id="game-title">Вгадай число від 1 до 100!</h2>
     <div class="input-row">
       <input id="guess" type="number" min="1" max="100" autofocus />
-      <!-- Кнопки + і - додаються JS -->
+      <input id="guess-range" type="range" min="1" max="100" value="1" style="display:none;">
     </div>
     <button id="check">Перевірити</button>
     <p id="result"></p>
