@@ -10,7 +10,7 @@ document.getElementById('check').onclick = function() {
   attempts++;
   let message = '';
   if (guess === secret) {
-    message = `🎉 Вітаю! Ви вгадали число ${secret} за ${attempts} спроб.`;
+    message = `🎉 Вітаю, таворот! Ви вгадали число ${secret} за ${attempts} спроб.`;
     document.getElementById('check').disabled = true;
 
     // Відтворити аплодисменти

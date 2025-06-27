@@ -6,6 +6,8 @@ body {
   justify-content: center;
   background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
   font-family: 'Segoe UI', 'Arial', sans-serif;
+  /* Центрування тексту для мобільних */
+  text-align: center;
 }
 
 .game-panel {
@@ -31,19 +33,21 @@ h2 {
   margin-bottom: 18px;
   font-weight: 700;
   letter-spacing: 1px;
+  font-size: 2rem;
 }
 
 input[type="number"] {
   width: 120px;
-  padding: 10px 14px;
+  padding: 14px 18px;
   border: 2px solid #b5c6e0;
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #3a4a6b;
   margin-bottom: 18px;
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
   box-shadow: 0 2px 8px rgba(100, 150, 200, 0.08);
+  text-align: center;
 }
 
 input[type="number"]:focus {
@@ -56,8 +60,8 @@ button {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 12px 28px;
-  font-size: 1.1rem;
+  padding: 16px 36px;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 18px;
   cursor: pointer;
@@ -81,7 +85,7 @@ button:hover, button:focus {
 
 #result {
   min-height: 32px;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: #6a82fb;
   margin-bottom: 8px;
   text-align: center;
@@ -94,9 +98,29 @@ button:hover, button:focus {
   min-height: 0;
 }
 
-@media (max-width: 500px) {
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 600px) {
   .game-panel {
     min-width: 90vw;
-    padding: 18px 6vw 18px 6vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+  h2 {
+    font-size: 2.3rem;
+  }
+  input[type="number"] {
+    width: 80vw;
+    font-size: 1.6rem;
+    padding: 16px 10px;
+  }
+  button {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 18px 0;
+  }
+  #result {
+    font-size: 1.4rem;
+  }
+  body {
+    text-align: center;
   }
 }
