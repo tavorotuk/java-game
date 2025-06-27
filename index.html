@@ -7,10 +7,14 @@
 </head>
 <body>
   <div class="game-panel">
-    <h2>Вгадай число від 1 до 100!</h2>
+    <div class="lang-switch">
+      <button type="button" class="lang-btn" id="pl-btn">PL</button>
+      <button type="button" class="lang-btn" id="ua-btn">UKR</button>
+    </div>
+    <h2 id="game-title">Вгадай число від 1 до 100!</h2>
     <div class="input-row">
       <input id="guess" type="number" min="1" max="100" autofocus />
-      <!-- Кнопки додаватимуться динамічно -->
+      <!-- Кнопки + і - додаються JS -->
     </div>
     <button id="check">Перевірити</button>
     <p id="result"></p>

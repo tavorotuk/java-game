@@ -5,12 +5,53 @@
 let secret = Math.floor(Math.random() * 100) + 1;
 let attempts = 0;
 
+const translations = {
+  ua: {
+    title: 'Вгадай число від 1 до 100!',
+    check: 'Перевірити',
+    retry: 'Спробувати ще раз',
+    win: (secret, attempts) => `🎉 Вітаю, таворот! Ви вгадали число ${secret} за ${attempts} спроб.`,
+    more: 'Спробуйте більше число!',
+    less: 'Спробуйте менше число!',
+    wrong: 'Введіть коректне число!'
+  },
+  pl: {
+    title: 'Zgadnij liczbę od 1 do 100!',
+    check: 'Sprawdź',
+    retry: 'Spróbuj ponownie',
+    win: (secret, attempts) => `🎉 Brawo! Zgadłeś liczbę ${secret} w ${attempts} próbach.`,
+    more: 'Spróbuj większą liczbę!',
+    less: 'Spróbuj mniejszą liczbę!',
+    wrong: 'Wpisz poprawną liczbę!'
+  }
+};
+
+let currentLang = 'ua';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('game-title').textContent = translations[lang].title;
+  document.getElementById('check').textContent = translations[lang].check;
+  // Активна кнопка
+  document.getElementById('pl-btn').classList.toggle('active', lang === 'pl');
+  document.getElementById('ua-btn').classList.toggle('active', lang === 'ua');
+  // Якщо є кнопка retry
+  const retryBtn = document.getElementById('retry');
+  if (retryBtn) retryBtn.textContent = translations[lang].retry;
+  // Очистити результат
+  document.getElementById('result').textContent = '';
+}
+
+document.getElementById('pl-btn').onclick = () => setLang('pl');
+document.getElementById('ua-btn').onclick = () => setLang('ua');
+
+// Додаємо зміну текстів у основній логіці гри:
 document.getElementById('check').onclick = function() {
   const guess = Number(document.getElementById('guess').value);
   attempts++;
   let message = '';
   if (guess === secret) {
-    message = `🎉 Вітаю, таворот! Ви вгадали число ${secret} за ${attempts} спроб.`;
+    message = translations[currentLang].win(secret, attempts);
     document.getElementById('check').disabled = true;
 
     // Відтворити аплодисменти
@@ -19,32 +60,29 @@ document.getElementById('check').onclick = function() {
 
     // Показати картинку-приз з анімацією чорної діри
     const prizeContainer = document.getElementById('prize-container');
-    prizeContainer.innerHTML = ''; // Очистити попередню картинку, якщо була
+    prizeContainer.innerHTML = '';
 
     const img = document.createElement('img');
-    img.src = 'prize.png'; // Покладіть свою картинку-приз у цю ж папку
+    img.src = 'prize.png';
     img.alt = 'Приз';
     img.className = 'prize-img';
 
     prizeContainer.appendChild(img);
 
-    // Запускаємо анімацію
     setTimeout(() => {
       img.classList.add('show');
     }, 10);
 
-    // Прибрати картинку після завершення анімації (1с з'явлення + 2с показ + 1с зникнення = 4с)
     setTimeout(() => {
-      if (img.parentNode) img.parentNode.removeChild(img);
+      prizeContainer.innerHTML = '';
     }, 4000);
 
     // Додаємо кнопку "Спробувати ще раз"
     if (!document.getElementById('retry')) {
       const retryBtn = document.createElement('button');
       retryBtn.id = 'retry';
-      retryBtn.textContent = 'Спробувати ще раз';
+      retryBtn.textContent = translations[currentLang].retry;
       retryBtn.onclick = function() {
-        // Скидаємо гру
         secret = Math.floor(Math.random() * 100) + 1;
         attempts = 0;
         document.getElementById('check').disabled = false;
@@ -55,11 +93,11 @@ document.getElementById('check').onclick = function() {
       document.getElementById('result').after(retryBtn);
     }
   } else if (guess < secret) {
-    message = 'Спробуйте більше число!';
+    message = translations[currentLang].more;
   } else if (guess > secret) {
-    message = 'Спробуйте менше число!';
+    message = translations[currentLang].less;
   } else {
-    message = 'Введіть коректне число!';
+    message = translations[currentLang].wrong;
   }
   document.getElementById('result').textContent = message;
 };
