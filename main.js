@@ -85,8 +85,8 @@ if (isMobile()) {
   incrementBtn.id = 'increment';
   incrementBtn.textContent = '+';
 
-  inputRow.appendChild(decrementBtn);
-  inputRow.appendChild(incrementBtn);
+  // Додаємо кнопки одразу після input
+  input.after(decrementBtn, incrementBtn);
 
   decrementBtn.onclick = function() {
     let value = parseInt(input.value, 10);
