@@ -17,6 +17,27 @@ document.getElementById('check').onclick = function() {
     const audio = new Audio('applause.mp3');
     audio.play();
 
+    // Показати картинку-приз з анімацією чорної діри
+    const prizeContainer = document.getElementById('prize-container');
+    prizeContainer.innerHTML = ''; // Очистити попередню картинку, якщо була
+
+    const img = document.createElement('img');
+    img.src = 'prize.png'; // Покладіть свою картинку-приз у цю ж папку
+    img.alt = 'Приз';
+    img.className = 'prize-img';
+
+    prizeContainer.appendChild(img);
+
+    // Запускаємо анімацію
+    setTimeout(() => {
+      img.classList.add('show');
+    }, 10);
+
+    // Прибрати картинку після завершення анімації (1с з'явлення + 2с показ + 1с зникнення = 4с)
+    setTimeout(() => {
+      if (img.parentNode) img.parentNode.removeChild(img);
+    }, 4000);
+
     // Додаємо кнопку "Спробувати ще раз"
     if (!document.getElementById('retry')) {
       const retryBtn = document.createElement('button');
@@ -43,24 +64,47 @@ document.getElementById('check').onclick = function() {
   document.getElementById('result').textContent = message;
 };
 
-document.getElementById('decrement').onclick = function() {
-  const input = document.getElementById('guess');
-  let value = parseInt(input.value, 10);
-  if (isNaN(value) || value <= 1) {
-    input.value = 1;
-  } else {
-    input.value = value - 1;
-  }
-  input.focus();
-};
+// Додаємо кнопки + і - тільки на мобільних пристроях
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
-document.getElementById('increment').onclick = function() {
+if (isMobile()) {
+  const inputRow = document.querySelector('.input-row');
   const input = document.getElementById('guess');
-  let value = parseInt(input.value, 10);
-  if (isNaN(value) || value >= 100) {
-    input.value = 100;
-  } else {
-    input.value = value + 1;
-  }
-  input.focus();
-};
+
+  const decrementBtn = document.createElement('button');
+  decrementBtn.type = 'button';
+  decrementBtn.className = 'arrow-btn';
+  decrementBtn.id = 'decrement';
+  decrementBtn.textContent = '−';
+
+  const incrementBtn = document.createElement('button');
+  incrementBtn.type = 'button';
+  incrementBtn.className = 'arrow-btn';
+  incrementBtn.id = 'increment';
+  incrementBtn.textContent = '+';
+
+  inputRow.appendChild(decrementBtn);
+  inputRow.appendChild(incrementBtn);
+
+  decrementBtn.onclick = function() {
+    let value = parseInt(input.value, 10);
+    if (isNaN(value) || value <= 1) {
+      input.value = 1;
+    } else {
+      input.value = value - 1;
+    }
+    input.focus();
+  };
+
+  incrementBtn.onclick = function() {
+    let value = parseInt(input.value, 10);
+    if (isNaN(value) || value >= 100) {
+      input.value = 100;
+    } else {
+      input.value = value + 1;
+    }
+    input.focus();
+  };
+}
